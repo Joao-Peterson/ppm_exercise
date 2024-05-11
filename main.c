@@ -211,17 +211,20 @@ void image_contrast(image_t *img, uint32_t paletteSize, const color_t *paletteCo
 
     for(size_t i = 0; i < img->h; i++){
         for(size_t j = 0; j < img->w; j++){
-            bool altered = false;
+            bool wasAlter = false;
             for(size_t k = 0; k < colorsAlterSize; k++){
-                if(!color_equal(img->pixels[i][j], paletteColors[colorsAlter[k]])){
-                    img->pixels[i][j] = (color_t){.r =255, .g = 255, .b = 255};
-                    altered = true;
+                if(color_equal(img->pixels[i][j], paletteColors[colorsAlter[k]])){
+                    wasAlter = true;
                     break;
                 }
             }
 
-            if(!altered && colorsAlterSize == 1){
-                img->pixels[i][j] = (color_t){.r = 0, .g = 0, .b = 0};
+            if(wasAlter){
+                if(colorsAlterSize == 1)
+                    img->pixels[i][j] = (color_t){.r = 0, .g = 0, .b = 0};
+            }
+            else{
+                img->pixels[i][j] = (color_t){.r =255, .g = 255, .b = 255};
             }
         }
     }
