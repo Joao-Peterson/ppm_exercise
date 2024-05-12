@@ -6,7 +6,7 @@ I_FLAGS+=-I./src
 L_FLAGS=
 L_FLAGS+=-lm
 
-SRCS=main.c
+SRCS=leticia.c
 SRCS+=src/hash.c
 SRCS+=src/matrix.c
 SRCS+=src/string+.c
